@@ -5,8 +5,49 @@
     <title>Title</title>
     <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css"
     th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/bootstrap/css/app.css"
+    th:href="@{/bootstrap/css/app.css}">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-md navbar-dark text-white">
+    <a href="#" class="navbar-brand">
+        <h3 class="mb-0">BookShop</h3>
+    </a>
+    <button type="button" class="navbar-toggler"
+            data-bs-toggler="collapse"
+            data-bs-target="#myNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="myNav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Explore</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Book</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<section id="showcase" class="d-flex justify-content-center align-items-center text-white">
+    <div id="overlay"></div>
+    <div id="header" class="container text-center">
+        <h3 class="display-5 m-0">MODERN BOOKSHOP</h3>
+        <h1 class="display-1">BOOKSHOP</h1>
+        <p class="lead d-none d-md-block">Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. In, labore.</p>
+        <button id="book" class="btn btn-outline-primary px-5 py-2 text-white">Book Now</button>
+    </div>
+</section>
 
 
 <div th:replace="${main}"></div>
