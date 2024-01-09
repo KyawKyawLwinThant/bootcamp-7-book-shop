@@ -4,8 +4,96 @@
 
 <body>
 <main role="main">
-   <div class="container">
-     <h1 class="mt-5 text-center display-3 text-info">Hello</h1>
+   <div class="container-fluid bg-light">
+       <div class="container p-5">
+           <section class="mt-4">
+               <h3 class="text-center p-5"><i>BestSellers</i></h3>
+               <div class="row">
+
+                   <div class="col">
+                       <div class="card shadow">
+                           <img th:src="${books.get(3).imgUrl}" class="card-img-top" alt="">
+                           <div class="card-body text-center">
+                               <h5 class="card-title" th:text="${books.get(3).title}"></h5>
+                               <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                   Excepturi, nobis.</p>
+                                   <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="col">
+                       <div class="card shadow">
+                           <img th:src="${books.get(5).imgUrl}" class="card-img-top" alt="">
+                           <div class="card-body text-center">
+                               <h5 class="card-title" th:text="${books.get(5).title}"></h5>
+                               <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                   Excepturi, nobis.</p>
+                                   <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                           </div>
+                       </div>
+                   </div>
+
+               </div>
+           </section>
+
+           <section id="quotes">
+               <div class="container text-center mt-4 p-5">
+                   <h3 class="my-4">WHAT OUR READERS ARE SAYING</h3>
+                   <div class="row">
+                       <div class="col-md-4">
+                           <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                           <blockquote class="blockquote">
+                               <p>Lorem ipsum dolor sit amet, consectetur
+                                   adipisicing elit. Beatae labore maiores nobis officia
+                                   sunt! Repellendus?</p>
+                               <footer class="blockquote-footer">James Serlay</footer>
+                           </blockquote>
+                       </div>
+                       <div class="col-md-4">
+                           <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                           <blockquote class="blockquote">
+                               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae labore maiores nobis officia sunt! Repellendus?</p>
+                               <footer class="blockquote-footer">James Serlay</footer>
+                           </blockquote>
+                       </div>
+                       <div class="col-md-4">
+                           <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                           <blockquote class="blockquote">
+                               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae labore maiores nobis officia sunt! Repellendus?</p>
+                               <footer class="blockquote-footer">James Serlay</footer>
+                           </blockquote>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+
+           <section>
+               <div class="container text-center mt-4">
+                   <h1>WHAT OTHERS ARE SAYING</h1>
+
+                   <div class="row">
+                       <div class="col-md-4" th:each="book : ${books}">
+                           <div class="card mb-3">
+                               <img th:src="${book.imgUrl}" class="img-thumbnail" alt="">
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+           <section>
+               <div class="container text-center mt-4">
+                   <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                   <blockquote class="blockquote">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dolor esse eveniet explicabo illum ipsam natus nobis provident voluptates? Alias, aspernatur atque
+                       consequatur eos eveniet illo non repudiandae sit vitae?
+                       <footer class="blockquote-footer mt-3">Richard Chan</footer>
+                   </blockquote>
+               </div>
+           </section>
+
+       </div>
+
    </div>
 </main>
 </body>
