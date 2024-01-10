@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+  <div class="container-fluid bg-light">
+    <div class="container mt-4">
+       <div class="row">
+         <div class="col">
+           <div class="card shadow">
+             <table  class="table table-striped my-4 p-5">
+                <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>ISBN</th>
+                  <th>Title</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+               <tbody>
+               <tr th:each="item : ${cartItems}">
+                 <td th:text="${item.id}"></td>
+                 <td th:text="${item.isbn}"></td>
+                 <td th:text="${item.title}"></td>
+                 <td th:text="${item.quantity}"></td>
+                 <td th:text="${'$'+item.price}"></td>
+                 <td><a th:href="@{'/cart/delete?id='+${item.id} +'&isbn='+ ${item.isbn}}" class="btn btn-outline-danger">Delete</a></td>
+               </tr>
+               </tbody>
+             </table>
+           </div>
+         </div>
+       </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

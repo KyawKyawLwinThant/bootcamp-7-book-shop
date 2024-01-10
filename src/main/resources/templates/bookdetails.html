@@ -5,6 +5,13 @@
 <main role="main">
   <div class="container-fluid bg-light">
     <div class="container mt-5">
+
+      <div class="row my-3 p-3">
+        <div class="col-md-10"></div>
+        <div class="col-md-2"><a style="text-decoration: none!important;color:red!important;" th:href="@{/cart/view-cart}"> <h3><i class="fas fa-cart-plus me-2 d-inline"></i>
+          <span class="badge bg-success" th:text="${cartSize}"></span></h3> </a></div>
+      </div>
+
       <div class="row">
         <div class="col-md-6 p-5">
           <div class="card shadow rounded">
@@ -19,6 +26,11 @@
             A beatae dolor enim ex odit quia reiciendis sint suscipit?</p>
           <p class="lead">Price : <span th:text="${'$'+ book.price}"></span></p>
           <p class="lead">Publisher : <span th:text="${book.publisher.publisherName}"></span></p>
+
+          <div class="my-3">
+            <a th:href="@{'/cart/add-cart?id='+ ${book.id} +'&isbn='+ ${book.isbn}+ '&page=details'}" class="btn btn-primary me-3">Add Cart</a>
+            <a th:href="@{/book/list-books}" class="btn btn-success">Continue Shopping</a>
+          </div>
         </div>
       </div>
     </div>
