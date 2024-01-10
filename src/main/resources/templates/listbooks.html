@@ -5,8 +5,10 @@
 <main role="main">
   <div class="container-fluid bg-light p-4">
       <div class="container">
-          <div class="my-3 text-end">
-              <h4><i class="fas fa-cart-plus me-5"></i> <span th:text="${cartSize}"></span></h4>
+          <div class="row my-3">
+              <div class="col-md-10"></div>
+              <div class="col-md-2"><h3><i class="fas fa-cart-plus me-2 d-inline"></i>
+                  <span class="badge bg-success" th:text="${cartSize}"></span></h3> </div>
           </div>
       <div class="row">
         <div class="col-md-4" th:each="book : ${books}">
@@ -20,7 +22,7 @@
               <div class="card-footer">
                   <div class="d-flex justify-content-between">
                       <span th:text="${'$'+book.price}"></span>
-                      <a th:href="@{'/cart/add-cart?id='+ ${book.id}+'&isbn='+${book.isbn}}" class="btn btn-success">Cart</a>
+                      <a th:href="@{'/cart/add-cart?id='+ ${book.id}+'&isbn='+${book.isbn}}" class="btn-link">Cart</a>
                       <a th:href="@{'/book/book-details?id='+ ${book.id} + '&isbn='+ ${book.isbn}}" class="btn-link"><i>Details</i></a>
                       <span th:text="${book.publisher.publisherName}"></span>
                   </div>
