@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -22,12 +19,13 @@ import java.time.LocalDate;
 public class AuthController {
     private final AuthService authService;
     private final CartService cartService;
-    @GetMapping()
+    @RequestMapping("/register")
     public String register(Model model){
         model.addAttribute("customer",new Customer());
         return "register";
     }
     //public Order(LocalDate orderDate, String billingAddress, String shippingAddress, PaymentMethod paymentMethod, double totalAmount) {
+    @PostMapping("/save-customer")
     public String saveCustomer(@RequestParam("billingAddress")String billingAddress,
                                @RequestParam("shippingAddress")String shippingAddress,
                                @RequestParam("payment")PaymentMethod method,
@@ -43,7 +41,10 @@ public class AuthController {
         if(result.hasErrors()){
             return "register";
         }
-        authService.register(customer,order);
+        System.out.println("BillingAddresss:"+ billingAddress);
+        System.out.println("PaymentMethod::"+ method);
+        System.out.println("==================="+ customer);
+       // authService.register(customer,order);
         return "redirect:/auth/info";
     }
     @GetMapping("/info")

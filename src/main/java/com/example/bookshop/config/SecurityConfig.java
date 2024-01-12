@@ -3,6 +3,7 @@ package com.example.bookshop.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +37,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests( a -> {
             a.requestMatchers("/bootstrap/**","/book/**","/cart/**","/","/home","/auth/**")
                     .permitAll()
+                    //.requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
                     .anyRequest().authenticated();
         });
         http.csrf( c -> c.disable());

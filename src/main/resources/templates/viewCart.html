@@ -35,7 +35,7 @@
                <h4 class="text-center text-muted">No Content</h4>
              </div>
              <div class="my-3">
-               <input type="submit" href="#" th:if="${!cartItems.isEmpty()}" class="btn btn-outline-primary me-2" value="Checkout"></input>
+               <input type="submit"  th:if="${!cartItems.isEmpty()}" class="btn btn-outline-primary me-2" value="Checkout"></input>
                <a th:href="@{/book/list-books}" class="btn btn-outline-secondary me-2">Continue Shopping</a>
                <a th:href="@{/cart/clear-cart}" th:if="${!cartItems.isEmpty()}" class="btn btn-outline-danger">Clear Cart</a>
              </div>
