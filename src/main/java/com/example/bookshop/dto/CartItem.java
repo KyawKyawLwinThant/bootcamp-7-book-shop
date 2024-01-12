@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -17,8 +19,9 @@ public class CartItem {
     private String isbn;
     private String title;
     private double price;
-    private int quantity;
-
+    private int quantity=1;
+    private List<Integer> cartItemQuantity=
+            new ArrayList<>();
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -30,5 +33,16 @@ public class CartItem {
     @Override
     public int hashCode() {
         return Objects.hash(id, isbn);
+    }
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }
