@@ -50,7 +50,7 @@ public class CartController {
             i++;
         }
         cartService.getCartItems().forEach(System.out::println);
-        return "redirect:/auth/register";
+        return "redirect:/register";
     }
     @GetMapping("/delete")
     public String deleteCartItem(@RequestParam("id")int id,

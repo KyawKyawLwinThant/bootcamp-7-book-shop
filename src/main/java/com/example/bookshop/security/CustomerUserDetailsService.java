@@ -13,6 +13,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
     private final CustomerDao customerDao;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Login UserNmae::::======="+ username);
         return customerDao
                 .findCustomerByCustomerName(username)
                 .map(SecurityCustomer::new)

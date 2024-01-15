@@ -5,6 +5,7 @@ import com.example.bookshop.entity.Order;
 import com.example.bookshop.entity.PaymentMethod;
 import com.example.bookshop.service.AuthService;
 import com.example.bookshop.service.CartService;
+import com.example.bookshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +16,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+//@RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
     private final CartService cartService;
+    private final CustomerService customerService;
     @RequestMapping("/register")
     public String register(Model model){
         model.addAttribute("customer",new Customer());
         return "register";
+    }
+    @GetMapping("/login-error")
+    public String loginError(Model model){
+        model.addAttribute("loginError",true);
+        return "login";
     }
     //public Order(LocalDate orderDate, String billingAddress, String shippingAddress, PaymentMethod paymentMethod, double totalAmount) {
     @PostMapping("/save-customer")
@@ -47,7 +56,7 @@ public class AuthController {
 
         authService.register(customer,order);
         this.customer = customer;
-        return "redirect:/auth/info";
+        return "redirect:/info";
     }
 
     private Customer customer;
@@ -66,17 +75,25 @@ public class AuthController {
     //auth/login
     @GetMapping("/login")
     public String login(){
+        if(Objects.isNull(customer)){
+            System.out.println("Login Page.......");
+            return "login";
+        }
+        else{
 
-        return "login";
+            System.out.println("CustomerName:"+ customer.getCustomerName());
+            customerService.saveCustomerOrderItems(customer);
+            return "login";
+        }
     }
     @ModelAttribute("totalPrice")
     public double totalAmount(){
-        return cartService
+        Optional<Double> optionalDouble=cartService
                 .getCartItems()
                 .stream()
                 .map(c -> c.getQuantity() * c.getPrice())
-                .reduce((a,b) -> a + b)
-                .get();
+                .reduce((a,b) -> a + b);
+        return optionalDouble.orElse(0.0);
     }
 
 

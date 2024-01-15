@@ -3,7 +3,29 @@
 
 <body>
 <main role="main">
+<div class="container-fluid bg-light mt-5">
+    <div class="container border rounded  mb-5" style="max-width: 400px;">
+        <h3 class="text-center mb-4">Sign In</h3>
+        <div th:if="${loginError}">
+            <div role="alert" class="alert alert-danger">
+                <p>Invalid Credentials</p>
+            </div>
+        </div>
+        <div th:if="${param.error}">
+            Invalid username and password.</div>
+        <form th:action="@{/login}" method="post">
+            <div for="username" class="mb-3">
+                <input type="text" id="username" name="username" class="form-control" placeholder="UserNmae">
+            </div>
+            <div for="password" class="mb-3">
+                <input type="text" id="password" name="password" class="form-control" placeholder="Password">
+            </div>
 
+            <input type="submit" value="Login" class="btn btn-primary">
+
+        </form>
+    </div>
+</div>
 </main>
 </body>
 </html>

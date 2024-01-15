@@ -26,9 +26,9 @@
           </div>
           <div class="row">
             <div class="col p-3">
-               <p>Hello ! <span th:text="${customerInfo.customerName}"></span>
+               <p class="lead h4">Hello ! <span th:text="${customerInfo.customerName}"></span>
                Your Order cost $<span th:text="${totalPrice}"></span> Are you sure ? You want to proceed ?</p>
-              <a href="#">OK</a>
+              <a th:href="@{/auth/login}" class="btn btn-primary">OK</a>
             </div>
           </div>
         </div>
