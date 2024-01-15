@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+  <div class="container-fluid bg-light">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 p-3">
+              <p class="lead">Customer Name:</p>
+              <p class="lead">PhoneNumber:</p>
+              <p class="lead">Email Address:</p>
+              <p class="lead">Billing Address:</p>
+              <p class="lead">Shipping Address:</p>
+            </div>
+            <div class="col-md-6 p-3">
+              <p class="lead text-muted" th:text="${customerInfo.customerName}"></p>
+              <p class="lead text-muted" th:text="${customerInfo.phoneNumber}"></p>
+              <p class="lead text-muted" th:text="${customerInfo.email}"></p>
+              <p class="lead text-muted" th:text="${customerInfo.billingAddress}"></p>
+              <p class="lead text-muted" th:text="${customerInfo.shippingAddress}"></p>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col p-3">
+               <p>Hello ! <span th:text="${customerInfo.customerName}"></span>
+               Your Order cost $<span th:text="${totalPrice}"></span> Are you sure ? You want to proceed ?</p>
+              <a href="#">OK</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 p-4">
+          <div class="row">
+            <div class="col">
+              <div class="card shadow">
+                <div class="card-header">
+                  <h3>Books Items</h3>
+                </div>
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="item :${cartItems}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.title}"></td>
+                    <td th:text="${item.isbn}"></td>
+                    <td th:text="${'$'+item.price}"></td>
+                    <td th:text="${item.quantity}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
