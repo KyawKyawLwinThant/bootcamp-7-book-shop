@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <body>
 <main role="main">
@@ -28,7 +29,11 @@
             <div class="col p-3">
                <p class="lead h4">Hello ! <span th:text="${customerInfo.customerName}"></span>
                Your Order cost $<span th:text="${totalPrice}"></span> Are you sure ? You want to proceed ?</p>
-              <a th:href="@{/auth/login}" class="btn btn-primary">OK</a>
+              <a sec:authorize="isAuthenticated()" th:href="@{'/home?info=clearCart'}" class="btn btn-primary">OK</a>
+              <div sec:authorize="!isAuthenticated()">
+                <a  th:href="@{/login}" class="btn btn-primary">Login</a>
+              </div>
+
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 package com.example.bookshop.controller;
 
+import com.example.bookshop.dao.CustomerDao;
 import com.example.bookshop.entity.Customer;
 import com.example.bookshop.entity.Order;
 import com.example.bookshop.entity.PaymentMethod;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
@@ -26,6 +28,7 @@ public class AuthController {
     private final AuthService authService;
     private final CartService cartService;
     private final CustomerService customerService;
+    private final CustomerDao customerDao;
     @RequestMapping("/register")
     public String register(Model model){
         model.addAttribute("customer",new Customer());
@@ -53,21 +56,41 @@ public class AuthController {
         if(result.hasErrors()){
             return "register";
         }
-
-        authService.register(customer,order);
-        this.customer = customer;
+        Optional<Customer> customer1=customerDao.findCustomerByCustomerName(customer.getCustomerName());
+        if(!customer1.isPresent()) {
+            authService.register(customer, order);
+        }
+       // customerService.saveCustomerOrderItems(customer);
+        this.customer= customer;
         return "redirect:/info";
     }
 
     private Customer customer;
     @GetMapping("/info")
     public ModelAndView checkoutInfo(ModelMap map,
-                                     @ModelAttribute("totalPrice")double totalPrice){
+                                     @ModelAttribute("totalPrice")double totalPrice, Principal principal){
+        Optional<Customer> customer1=null;
+            if(principal==null) {
+                customer1 = customerDao
+                        .findCustomerByCustomerName(customer.getCustomerName());
+            }else{
+                customer1 = customerDao
+                        .findCustomerByCustomerName(principal.getName());
+            }
+            if(customer1.isPresent()){
+                customerService.saveCustomerOrderItems(customer1.get());
+            }
+
         ModelAndView mv=new ModelAndView();
         mv.addObject("cartItems",cartService.getCartItems());
         mv.addObject("totalPrice",totalPrice);
-        mv.addObject("customerInfo",authService
-                .findCustomerInfoByCustomerName(customer.getCustomerName()));
+        if(principal!=null){
+            mv.addObject("customerInfo", authService
+                    .findCustomerInfoByCustomerName(principal.getName()));
+        }else {
+            mv.addObject("customerInfo", authService
+                    .findCustomerInfoByCustomerName(customer.getCustomerName()));
+        }
         mv.setViewName("info");
         return mv;
 
@@ -75,16 +98,11 @@ public class AuthController {
     //auth/login
     @GetMapping("/login")
     public String login(){
-        if(Objects.isNull(customer)){
-            System.out.println("Login Page.......");
-            return "login";
-        }
-        else{
 
-            System.out.println("CustomerName:"+ customer.getCustomerName());
-            customerService.saveCustomerOrderItems(customer);
+            System.out.println("Login Page.......");
+            cartService.clearCart();
             return "login";
-        }
+
     }
     @ModelAttribute("totalPrice")
     public double totalAmount(){

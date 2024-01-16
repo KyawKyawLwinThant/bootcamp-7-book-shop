@@ -1,9 +1,13 @@
 package com.example.bookshop.controller;
 
+import com.example.bookshop.dao.BookBoughtDao;
 import com.example.bookshop.dao.BookDao;
+import com.example.bookshop.dto.OrderItemInfo;
 import com.example.bookshop.entity.BookId;
+import com.example.bookshop.entity.BooksBought;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.CartService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @Controller
@@ -23,12 +28,23 @@ public class BookController {
 
     private final BookService bookService;
     private final CartService  cartService;
+    private final BookBoughtDao bookBoughtDao;
+
+    @GetMapping("/own-library")
+    public String listOwnLibrary(Model model, Principal principal){
+        String userName = principal.getName();
+        BooksBought booksBought=bookBoughtDao.findBooksBoughtByCustomerName(userName)
+                .orElseThrow(EntityNotFoundException::new);
+        model.addAttribute("bookBought",booksBought);
+        return "owner_library";
+    }
 
     //book/list-books
     @GetMapping("/list-books")
     public String listBooks(Model model){
         model.addAttribute("books",
                 bookService.listBooks());
+        model.addAttribute("cartSize",cartService.cartSize());
         return "listbooks";
     }
     @ModelAttribute("cartSize")

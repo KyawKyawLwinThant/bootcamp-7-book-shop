@@ -19,7 +19,7 @@ public class BookShopApplication {
     private final GenreDao genreDao;
     private final PublisherDao publisherDao;
     private final RoleDao roleDao;
-    @Bean @Transactional@Profile("security")
+    @Bean @Transactional @Profile("security")
     public ApplicationRunner runner1(){
         return r ->{
             Role admin=new Role();

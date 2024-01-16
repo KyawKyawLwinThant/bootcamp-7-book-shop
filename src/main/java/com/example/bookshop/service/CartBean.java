@@ -17,6 +17,7 @@ public class CartBean {
             new HashSet<>();
 
     public void addCartItem(CartItem cartItem){
+        System.out.println("Cart Item::::=================="+ cartItem);
         cartItems.add(cartItem);
     }
 

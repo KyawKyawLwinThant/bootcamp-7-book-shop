@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+  <div class="container-fluid bg-light">
+    <div class="container">
+      <h1>Welcome ! <span th:text="${bookBought.customerName}"></span></h1>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>My  Books</h4>
+            </div>
+            <table class="table table-striped">
+               <thead>
+               <tr>
+                 <th>Id</th>
+                 <th>ISBN</th>
+                 <th>Title</th>
+                 <th>Price</th>
+                 <th>Author</th>
+               </tr>
+               </thead>
+               <tbody>
+                <tr th:each="book : ${bookBought.books}">
+                  <td th:text="${book.id}"></td>
+                  <td th:text="${book.isbn}"></td>
+                  <td th:text="${book.title}"></td>
+                  <td th:text="${'$'+ book.price}"></td>
+                </tr>
+               </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+
+        <p class="lead text-muted">You have ordered on
+          <span th:text="${bookBought.orderDate}"></span> with OrderId ::
+          <span th:text="${bookBought.orderId}"></span></p>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>

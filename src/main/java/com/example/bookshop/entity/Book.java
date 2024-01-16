@@ -30,8 +30,7 @@ public class Book {
     @ManyToMany
     private List<Genre>  genres=
             new ArrayList<>();
-    @ManyToOne
-    private OrderItem orderItem;
+
 
 
 

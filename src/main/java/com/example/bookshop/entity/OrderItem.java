@@ -17,16 +17,12 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int itemId;
     private int quantity;
-    @OneToMany(mappedBy = "orderItem")
-    private List<Book> books=
-            new ArrayList<>();
+    @ManyToOne
+    private Book book;
     @JoinColumn(name = "order_id_fk")
     @ManyToOne
     private Order order;
 
-    public void addBook(Book book){
-        book.setOrderItem(this);
-        this.books.add(book);
-    }
+
 
 }

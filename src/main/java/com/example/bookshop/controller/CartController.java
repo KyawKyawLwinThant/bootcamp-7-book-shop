@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class CartController {
         return "viewCart";
     }
     @PostMapping("/checkout")
-    public String checkout(CartItem cartItem){
+    public String checkout(CartItem cartItem, Principal principal){
 
         int i =0;
         for(CartItem item:cartService.getCartItems()){
@@ -50,7 +51,12 @@ public class CartController {
             i++;
         }
         cartService.getCartItems().forEach(System.out::println);
-        return "redirect:/register";
+        if(principal==null){
+            return "redirect:/register";
+        }
+        else{
+            return "redirect:/info";
+        }
     }
     @GetMapping("/delete")
     public String deleteCartItem(@RequestParam("id")int id,
