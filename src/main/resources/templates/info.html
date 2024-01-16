@@ -31,7 +31,7 @@
                Your Order cost $<span th:text="${totalPrice}"></span> Are you sure ? You want to proceed ?</p>
               <a sec:authorize="isAuthenticated()" th:href="@{'/home?info=clearCart'}" class="btn btn-primary">OK</a>
               <div sec:authorize="!isAuthenticated()">
-                <a  th:href="@{/login}" class="btn btn-primary">Login</a>
+                <a  th:href="@{'/login?info=info'}" class="btn btn-primary">Login</a>
               </div>
 
             </div>

@@ -97,10 +97,12 @@ public class AuthController {
     }
     //auth/login
     @GetMapping("/login")
-    public String login(){
+    public String login(@RequestParam("info")String info){
 
             System.out.println("Login Page.......");
-            cartService.clearCart();
+            if(info !=null && info.equals("info")) {
+                cartService.clearCart();
+            }
             return "login";
 
     }
