@@ -97,7 +97,7 @@ public class AuthController {
     }
     //auth/login
     @GetMapping("/login")
-    public String login(@RequestParam("info")String info){
+    public String login(@RequestParam(value = "info",required = false)String info){
 
             System.out.println("Login Page.......");
             if(info !=null && info.equals("info")) {
